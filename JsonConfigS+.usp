@@ -1,0 +1,145 @@
+/*******************************************************************************************
+  Compiler Directives
+*******************************************************************************************/
+#DEFINE_CONSTANT true 1
+#DEFINE_CONSTANT false 0
+#DEFINE_CONSTANT NUM_OF_CONFIGS 5
+// #CATEGORY "" 
+#PRINT_TO_TRACE
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+#ENCODING_ASCII
+/*******************************************************************************************
+  Include Libraries
+*******************************************************************************************/
+#user_simplsharp_library "JsonConfigManager"
+/*******************************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+*******************************************************************************************/
+digital_input Initialize,ReadConfig,WriteConfig,_skip_,_skip_,_skip_,DigitalValuesIn[NUM_OF_CONFIGS];
+string_input _skip_,SerialValuesIn[NUM_OF_CONFIGS][100];
+analog_input _skip_,AnalogValuesIn[NUM_OF_CONFIGS];
+ 
+digital_output Initialized,FileBusyFb,_skip_,_skip_,_skip_,_skip_,DigitalValuesOut[NUM_OF_CONFIGS];    
+string_output _skip_,SerialValuesOut[NUM_OF_CONFIGS];
+analog_output _skip_,AnalogValuesOut[NUM_OF_CONFIGS]; 
+
+JsonConfig _jsonConfig;
+/*******************************************************************************************
+  Parameters
+*******************************************************************************************/
+string_parameter _skip_,_skip_,_skip_,_skip_,FilePath$[100];
+string_parameter _skip_,DigitalKeys[NUM_OF_CONFIGS][100], _skip_;
+string_parameter SerialKeys[NUM_OF_CONFIGS][100], _skip_;
+string_parameter AnalogKeys[NUM_OF_CONFIGS][100], _skip_;
+      
+#begin_parameter_properties FilePath$
+    propValidUnits = unitString;
+    propDefaultValue = "\\user\\config.json";
+#end_parameter_properties
+      
+#begin_parameter_properties SerialKeys, AnalogKeys, DigitalKeys
+   propValidUnits = unitString;
+   propDefaultUnit = unitString;
+   propDefaultValue = "";
+#end_parameter_properties
+/*******************************************************************************************
+  Functions
+*******************************************************************************************/
+function Init()
+{
+    integer isInit;
+    isInit = _jsonConfig.Initialize(FilePath$);
+    Initialized = isInit;
+}
+/*******************************************************************************************
+  Event Handlers
+*******************************************************************************************/
+push Initialize
+{
+    Init();  
+}
+
+push ReadConfig
+{
+    _jsonConfig.ReadConfig();    
+}
+
+push WriteConfig
+{
+    integer i;
+    string val[2];
+    for(i = 1 to NUM_OF_CONFIGS)
+    {
+         if(isSignalDefined(SerialValuesIn[i]) && SerialKeys[i] != "")
+         {
+             _jsonConfig.SetJsonValues(SerialKeys[i],SerialValuesIn[i],"serial");
+         }
+         
+         if(isSignalDefined(AnalogValuesIn[i]) && AnalogKeys[i] != "")
+         {
+             _jsonConfig.SetJsonValues(AnalogKeys[i],itoa(AnalogValuesIn[i]),"analog");
+         }
+
+         if(isSignalDefined(DigitalValuesIn[i]) && DigitalKeys[i] != "")
+         {
+             if(DigitalValuesIn[i])
+                 val = "1";
+             else
+                 val = "0";
+             _jsonConfig.SetJsonValues(DigitalKeys[i],val,"digital");     
+         }
+    }
+    _jsonConfig.WriteConfig();
+}
+
+callback function ReturnJsonValuesCallbackFunction(string key, string value, string type)
+{
+    integer i;
+    if(type = "serial")
+    {
+        for(i = 1 to NUM_OF_CONFIGS)
+        {
+             if(SerialKeys[i] = key)
+             {
+                  SerialValuesOut[i] = value;
+             }
+        }
+    }
+    else if(type = "analog")
+    {
+        for(i = 1 to NUM_OF_CONFIGS)
+        {
+             if(AnalogKeys[i] = key)
+             {
+                  AnalogValuesOut[i] = atoi(value);
+             }
+        }
+    }
+    else if(type = "digital")
+    {
+        for(i = 1 to NUM_OF_CONFIGS)
+        {
+             if(DigitalKeys[i] = key)
+             {
+                  DigitalValuesOut[i] = atoi(value);
+             }
+        }
+    }                    
+}
+
+callback function FileBusyCallbackFunction(integer busy)
+{
+   FileBusyFb = busy;
+}
+/*******************************************************************************************
+  Main()
+*******************************************************************************************/
+function main()
+{
+	waitForInitializationComplete();
+    registerDelegate(_jsonConfig, ReturnJsonValues, ReturnJsonValuesCallbackFunction);
+    registerDelegate(_jsonConfig, FileBusy, FileBusyCallbackFunction);
+    Init(); 
+}

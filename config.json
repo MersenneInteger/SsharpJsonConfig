@@ -1,0 +1,15 @@
+{
+    "Signals": [{
+        "Key": "biampIP",
+        "Type": "serial",
+        "Value": "0.0.0.0"
+    }, {
+        "Key": "password",
+        "Type": "serial",
+        "Value": "12345"
+    },{
+        "Key": "roomName",
+        "Type": "serial",
+        "Value": "Training Room 132"
+    }]
+}
