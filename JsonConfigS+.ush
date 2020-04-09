@@ -203,8 +203,7 @@
   ObjTp=Dp
   H=8
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -212,8 +211,7 @@
   ObjTp=Dp
   H=9
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -221,8 +219,7 @@
   ObjTp=Dp
   H=10
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -230,8 +227,7 @@
   ObjTp=Dp
   H=11
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -239,8 +235,7 @@
   ObjTp=Dp
   H=12
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -248,8 +243,7 @@
   ObjTp=Dp
   H=14
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -257,8 +251,7 @@
   ObjTp=Dp
   H=15
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -266,8 +259,7 @@
   ObjTp=Dp
   H=16
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -275,8 +267,7 @@
   ObjTp=Dp
   H=17
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -284,8 +275,7 @@
   ObjTp=Dp
   H=18
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -293,8 +283,7 @@
   ObjTp=Dp
   H=20
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -302,8 +291,7 @@
   ObjTp=Dp
   H=21
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -311,8 +299,7 @@
   ObjTp=Dp
   H=22
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -320,8 +307,7 @@
   ObjTp=Dp
   H=23
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
@@ -329,8 +315,7 @@
   ObjTp=Dp
   H=24
   Tp=1
-  HD=True
-  DV=
+  HD=False
   NoS=False
   VVS=0
 [END]
