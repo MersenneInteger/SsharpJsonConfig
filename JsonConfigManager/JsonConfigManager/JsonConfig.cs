@@ -23,6 +23,12 @@ namespace JsonConfigManager
         #endregion
 
         #region S+ Methods
+
+        /// <summary>
+        /// Set file path for config file. Return 1 if successful, else 0.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>ushort</returns>
         public ushort Initialize(string filePath)
         {
             _filePath = filePath;
@@ -36,6 +42,9 @@ namespace JsonConfigManager
             return 1;
         }
 
+        /// <summary>
+        /// Read and deserialize JSON file
+        /// </summary>
         public void ReadConfig()
         {
             if (!_isInitialized)
@@ -65,6 +74,9 @@ namespace JsonConfigManager
             }
         }
 
+        /// <summary>
+        /// Serialize and Write JSON config to file
+        /// </summary>
         public void WriteConfig()
         {
             FileStream file = null;
@@ -95,6 +107,12 @@ namespace JsonConfigManager
             }
         }
 
+        /// <summary>
+        /// Populate _jsonData.Signals with JSON data set in Simpl
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <param name="value">value</param>
+        /// <param name="type">type</param>
         public void SetJsonValues(string key, string value, string type)
         {
             _jsonData.Signals.Add(new Signal { Key = key, Value = value, Type = type });
@@ -105,6 +123,11 @@ namespace JsonConfigManager
         #region S# Methods
         private enum ErrorLevel { Notice, Warning, Error, None }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="errLevel"></param>
         private void Debug(string msg, ErrorLevel errLevel)
         {
             CrestronConsole.PrintLine(msg);
