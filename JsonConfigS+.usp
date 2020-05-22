@@ -38,20 +38,18 @@ string_parameter AnalogKeys[NUM_OF_CONFIGS][100], _skip_;
     propValidUnits = unitString;
     propDefaultValue = "\\user\\config.json";
 #end_parameter_properties
-/*      
+      
 #begin_parameter_properties SerialKeys, AnalogKeys, DigitalKeys
    propValidUnits = unitString;
    propDefaultUnit = unitString;
    propDefaultValue = "";
-#end_parameter_properties*/
+#end_parameter_properties
 /*******************************************************************************************
   Functions
 *******************************************************************************************/
 function Init()
 {
-    integer isInit;
-    isInit = _jsonConfig.Initialize(FilePath$);
-    Initialized = isInit;
+    Initialized = _jsonConfig.Initialize(FilePath$);
 }
 /*******************************************************************************************
   Event Handlers
@@ -104,6 +102,7 @@ callback function ReturnJsonValuesCallbackFunction(string key, string value, str
              if(SerialKeys[i] = key)
              {
                   SerialValuesOut[i] = value;
+                  break;
              }
         }
     }
@@ -114,6 +113,7 @@ callback function ReturnJsonValuesCallbackFunction(string key, string value, str
              if(AnalogKeys[i] = key)
              {
                   AnalogValuesOut[i] = atoi(value);
+                  break;
              }
         }
     }
@@ -127,6 +127,7 @@ callback function ReturnJsonValuesCallbackFunction(string key, string value, str
                       DigitalValuesOut[i] = on;
                   else
                       DigitalValuesOut[i] = off;
+                  break;
              }
         }
     }                   
@@ -136,6 +137,7 @@ callback function FileBusyCallbackFunction(integer busy)
 {
    FileBusyFb = busy;
 }
+
 /*******************************************************************************************
   Main()
 *******************************************************************************************/
@@ -144,5 +146,5 @@ function main()
 	waitForInitializationComplete();
     registerDelegate(_jsonConfig, ReturnJsonValues, ReturnJsonValuesCallbackFunction);
     registerDelegate(_jsonConfig, FileBusy, FileBusyCallbackFunction);
-    Init(); 
+    Init();
 }

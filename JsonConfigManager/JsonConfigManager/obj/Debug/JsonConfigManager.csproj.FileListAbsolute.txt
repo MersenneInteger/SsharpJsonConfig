@@ -6,3 +6,12 @@ D:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\bin\Debug\SimplSharpHelp
 D:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\obj\Debug\ResolveAssemblyReference.cache
 D:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\obj\Debug\JsonConfigManager.dll
 D:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\obj\Debug\JsonConfigManager.pdb
+E:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\bin\Debug\JsonConfigManager.dll
+E:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\bin\Debug\JsonConfigManager.pdb
+E:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\bin\Debug\Newtonsoft.Json.Compact.dll
+E:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\bin\Debug\SimplSharpCustomAttributesInterface.dll
+E:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\bin\Debug\SimplSharpHelperInterface.dll
+E:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\bin\Debug\SimplSharpLogger.dll
+E:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\obj\Debug\ResolveAssemblyReference.cache
+E:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\obj\Debug\JsonConfigManager.dll
+E:\C#\s#\JsonConfig\JsonConfigManager\JsonConfigManager\obj\Debug\JsonConfigManager.pdb

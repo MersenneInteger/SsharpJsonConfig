@@ -4,6 +4,7 @@ using Crestron.SimplSharp;
 using Newtonsoft.Json;
 using Crestron.SimplSharp.CrestronIO;
 using System.Collections.Generic;
+using SimplSharpLogger;
 
 namespace JsonConfigManager
 {
@@ -14,6 +15,7 @@ namespace JsonConfigManager
         private string _filePath { get; set; }
         private bool _isInitialized { get; set; }
         private JsonData _jsonData = new JsonData();
+        private CCriticalSection _critSect = new CCriticalSection();
 
         public delegate void ReturnJsonValuesHandler(SimplSharpString key, SimplSharpString value, SimplSharpString type);
         public ReturnJsonValuesHandler ReturnJsonValues { get; set; }
@@ -34,7 +36,7 @@ namespace JsonConfigManager
             _filePath = filePath;
             if (!File.Exists(_filePath))
             {
-                Debug("File does not exist: " + _filePath, ErrorLevel.Error);
+                Debug.Log("File does not exist: " + _filePath, Debug.ErrorLevel.Error);
                 _isInitialized = false;
                 return 0;
             }
@@ -49,28 +51,30 @@ namespace JsonConfigManager
         {
             if (!_isInitialized)
             {
-                Debug("Not Initialized", ErrorLevel.Warning);
+                Debug.Log("Not Initialized", Debug.ErrorLevel.Warning);
                 return;
             }
 
             FileBusy(1);
             try
             {
+                _critSect.Enter();
                 var fileContents = File.ReadToEnd(_filePath, Encoding.ASCII);
                 var jsonSignals = JsonConvert.DeserializeObject<JsonData>(fileContents);
                 foreach (var sig in jsonSignals.Signals)
                 {
                     ReturnJsonValues(sig.Key, sig.Value.ToString(), sig.Type.ToLower());
                 }
-                Debug("File Read Success", ErrorLevel.None);
+                Debug.Log("File Read Success", Debug.ErrorLevel.None);
             }
             catch (Exception e)
             {
-                Debug(e.Message + " occured reading from file: " + _filePath, ErrorLevel.Error);
+                Debug.Log(e.Message + " occured reading from file: " + _filePath, Debug.ErrorLevel.Error);
             }
             finally
             {
                 FileBusy(0);
+                _critSect.Leave();
             }
         }
 
@@ -83,27 +87,29 @@ namespace JsonConfigManager
 
             if (!_isInitialized)
             {
-                Debug("Not Initialized", ErrorLevel.Warning);
+                Debug.Log("Not Initialized", Debug.ErrorLevel.Warning);
                 return;
             }
 
+            _critSect.Enter();
             FileBusy(1);
             try
             {
                 file = new FileStream(_filePath, FileMode.Create);
                 var jsonContents = JsonConvert.SerializeObject(_jsonData, Formatting.Indented);
                 file.Write(jsonContents, Encoding.ASCII);
-                Debug("File Write Success", ErrorLevel.None);
+                Debug.Log("File Write Success", Debug.ErrorLevel.None);
             }
             catch (Exception e)
             {
-                Debug(e.Message + " occured writing to file: " + _filePath, ErrorLevel.Error);
+                Debug.Log(e.Message + " occured writing to file: " + _filePath, Debug.ErrorLevel.Error);
             }
             finally
             {
                 if(file != null)
                     file.Close();
                 FileBusy(0);
+                _critSect.Leave();
             }
         }
 
@@ -119,53 +125,5 @@ namespace JsonConfigManager
         }
 
         #endregion
-
-        #region S# Methods
-        private enum ErrorLevel { Notice, Warning, Error, None }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="errLevel"></param>
-        private void Debug(string msg, ErrorLevel errLevel)
-        {
-            CrestronConsole.PrintLine(msg);
-            if (errLevel != ErrorLevel.None)
-            {
-                switch (errLevel)
-                {
-                    case ErrorLevel.Notice:
-                        ErrorLog.Notice(msg);
-                        break;
-                    case ErrorLevel.Warning:
-                        ErrorLog.Warn(msg);
-                        break;
-                    case ErrorLevel.Error:
-                        ErrorLog.Error(msg);
-                        break;
-                }
-            }
-        }
-        #endregion
-    }
-
-    public class Signal
-    {
-        [JsonProperty("Key")]
-        public string Key { get; set; }
-        [JsonProperty("Type")]
-        public string Type { get; set; }
-        [JsonProperty("Value")]
-        public object Value { get; set; }
-    }
-
-    public class JsonData
-    {
-        public List<Signal> Signals { get; set; }
-        public JsonData()
-        {
-            Signals = new List<Signal>();
-        }
     }
 }

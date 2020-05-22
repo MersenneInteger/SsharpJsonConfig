@@ -14,7 +14,7 @@
 [END]
 [BEGIN]
   ObjTp=Symbol
-  Exclusions=1,19,20,21,88,89,167,168,179,213,214,215,216,217,225,226,248,249,266,267,310,362,378,380,405,407,408,409,478,522,537,554,586,590,611,624,718,756,767,830,841,842,854,883,955,1032,1062,1079,1128,1129,1134,1140,1157,1158,1195,1199,1220,1221,1222,1223,1299,1348,1349,1439,1472,1473,1499,1746,1803,1975,2229,2354,2514,2523,2532,2706,2707,3235,3236,3427,3454,3567,3568,3601,3602,3708,3902,3903,3912,3918,3925,3926,4206,4207,
+  Exclusions=1,19,20,21,88,89,167,168,179,213,214,215,216,217,225,226,248,249,266,267,310,362,378,380,405,407,408,409,478,522,537,554,586,590,611,624,718,756,767,830,841,842,854,883,955,1032,1062,1079,1128,1129,1134,1140,1157,1158,1195,1199,1220,1221,1222,1223,1299,1348,1349,1439,1472,1473,1499,1746,1803,1975,2229,2354,2514,2523,2532,2706,2707,3235,3236,3427,3454,3567,3568,3601,3602,3708,3902,3903,3912,3918,3925,3926,4206,4207,6114,
   Exclusions_CDS=5
   Inclusions_CDS=6
   Name=JsonConfigS+
@@ -203,7 +203,8 @@
   ObjTp=Dp
   H=8
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -211,7 +212,8 @@
   ObjTp=Dp
   H=9
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -219,7 +221,8 @@
   ObjTp=Dp
   H=10
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -227,7 +230,8 @@
   ObjTp=Dp
   H=11
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -235,7 +239,8 @@
   ObjTp=Dp
   H=12
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -243,7 +248,8 @@
   ObjTp=Dp
   H=14
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -251,7 +257,8 @@
   ObjTp=Dp
   H=15
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -259,7 +266,8 @@
   ObjTp=Dp
   H=16
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -267,7 +275,8 @@
   ObjTp=Dp
   H=17
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -275,7 +284,8 @@
   ObjTp=Dp
   H=18
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -283,7 +293,8 @@
   ObjTp=Dp
   H=20
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -291,7 +302,8 @@
   ObjTp=Dp
   H=21
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -299,7 +311,8 @@
   ObjTp=Dp
   H=22
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -307,7 +320,8 @@
   ObjTp=Dp
   H=23
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
@@ -315,7 +329,8 @@
   ObjTp=Dp
   H=24
   Tp=1
-  HD=False
+  HD=True
+  DV=
   NoS=False
   VVS=0
 [END]
